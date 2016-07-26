@@ -19,6 +19,8 @@ const ProfileBox = React.createClass({
   // screen_name = Twitter handle
   // profile_banner_url = banner picture
   // profile_image_url = profile picture
+  
+  // use multiline to style this profile box later
 
   componentDidMount: function () {
     this.fetchTweets();
