@@ -30,7 +30,7 @@ const ProfileBox = React.createClass({
     let self = this;
     axios.get('https://protected-oasis-31937.herokuapp.com/tweets/peedeerich')     // where our API is located.---- Might need the catch...
       .then(function (response) {
-        console.log(response);
+        // console.log(response);
         var userData = response.data.tweetData[0].user;
         self.extractUserData(userData);
       });
