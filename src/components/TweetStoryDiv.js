@@ -1,15 +1,57 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
+const axios = require('axios');
 const TweetStory = require('./TweetStory');
 
 const TweetStoryDiv = React.createClass({
+
+  getInitialState: function () {
+    return {
+      loaded: false
+    }
+  },
+
+  componentDidMount: function () {
+    this.fetchStory()
+  },
+
+  fetchStory: function () {
+    let self = this;
+    axios.get('https://protected-oasis-31937.herokuapp.com/tweets')
+      .then(function (response) {
+        console.log(response);
+        var allTweets = response.data;//[0].tweets;
+        self.extractAllTweets(allTweets);
+      })
+  },
+
+  extractAllTweets: function (allTweets) {
+    var result = [];
+    allTweets.map(function (person, index) {
+      return person.tweets;
+    })
+      .forEach(function (personsTweets, index) {
+        personsTweets.forEach(function (tweet, index) {
+          result.push(tweet);
+        })
+      });
+    console.log(result);
+    this.setState({
+      tweets: result,
+      loaded: true
+    })
+  },
+
+
+
+
   render: function() {
     return (
       <div className="panel">
         <div className="panel-heading text-center">
           <h3 className="title">Tweet Story</h3>
         </div>
-        <TweetStory />
+        <TweetStory tweets={this.state.tweets} loaded={this.state.loaded}/>
       </div>
     );
   }

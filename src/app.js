@@ -6,7 +6,7 @@ const ProfileBox = require('./components/ProfileBox');
 const TweetStory = require('./components/TweetStory');
 const FollowBox = require('./components/FollowBox');
 const LinksBox = require('./components/LinksBox');
-
+const TweetStoryDiv = require('./components/TweetStoryDiv');
 
 const App = React.createClass({
   render: function () {
@@ -19,7 +19,7 @@ const App = React.createClass({
             <TrendsDiv />
           </div>
           <div className="column is-half">
-            <TweetStory />
+            <TweetStoryDiv />
           </div>
           <div className="column is-one-quarter">
             <FollowBox />
