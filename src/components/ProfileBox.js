@@ -52,14 +52,27 @@ const ProfileBox = React.createClass({
   render: function() {
     return (
       <div className="panel">
-        <div className="panel-heading text-center">
+        <div className="column">
           <img src={this.state.profile_banner_url}/>
-          <img src={this.state.profile_image_url}/>
-          <p>{this.state.name}</p>
-          <p>@{this.state.screen_name}</p>
-          <p>Tweets {this.state.statuses_count}</p>
-          <p>Following {this.state.friends_count}</p>
-          <p>Followers {this.state.followers_count}</p>
+        </div>
+        <div className="column is-half">
+          <img className="profile-pic" src={this.state.profile_image_url}/>
+        </div>
+        <div className="column is-half">
+          <p className="profile-text">{this.state.name}</p>
+          <p className="profile-text">@{this.state.screen_name}</p>
+        </div>
+        <div className="column is-one-third">
+          <p className="profile-text">Tweets</p>
+          <p className="profile-text"> {this.state.statuses_count}</p>
+        </div>
+        <div className="column is-one-third">
+          <p className="profile-text">Following</p>
+            <p className="profile-text">{this.state.friends_count}</p>
+        </div>
+        <div className="column is-one-third">
+          <p className="profile-text">Followers</p>
+          <p className="profile-text">{this.state.followers_count}</p>
         </div>
       </div>
     );

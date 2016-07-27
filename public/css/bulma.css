@@ -260,6 +260,19 @@ img {
   max-width: 100%;
 }
 
+.profile-pic {
+    margin-top: -150px;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+
+.profile-text {
+    text-align: center;
+    font-size: 16px;
+    max-font-size: 16px;
+
+}
+
 input[type="checkbox"],
 input[type="radio"] {
   vertical-align: baseline;
@@ -3540,12 +3553,14 @@ a.box:active {
             flex: none;
     width: 50%;
   }
+
   .column.is-one-third, .column.is-one-third-tablet {
     -webkit-box-flex: 0;
     -webkit-flex: none;
         -ms-flex: none;
             flex: none;
     width: 33.3333%;
+      display: inline-block;
   }
   .column.is-one-quarter, .column.is-one-quarter-tablet {
     -webkit-box-flex: 0;

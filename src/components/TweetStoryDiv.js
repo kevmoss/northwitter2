@@ -35,15 +35,31 @@ const TweetStoryDiv = React.createClass({
           result.push(tweet);
         })
       });
+    // result = this.sortAllTweets(result);
     console.log(result);
+    // var allDates = result.map(function (tweet, index) {
+    //   return Date.parse(tweet.created_at);
+    //
+    // }).sort(function(dateA, dateB) {
+    //   return dateB - dateA;
+    // });
+    // console.log(allDates);
+    var sortedStory = result.sort(function (tweetA, tweetB) {
+      return Date.parse(tweetB.created_at)-Date.parse(tweetA.created_at);
+    });
+    console.log(sortedStory);
     this.setState({
-      tweets: result,
+      tweets: sortedStory,
       loaded: true
     })
   },
-
-
-
+  //
+  // sortAllTweets: function (allTweets) {
+  //   allTweets.sort(function (tweetA, tweetB ) {
+  //     // return Date.parse(tweetA.created_at)-Date.parse(tweetB.created_at);
+  //     return 1;
+  //   })
+  // },
 
   render: function() {
     return (
