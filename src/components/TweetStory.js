@@ -37,6 +37,8 @@ const TweetStory= React.createClass({
       tweets: data
     })
   },*/
+  
+  
 
   render: function() {
     if (!this.props.loaded) {
@@ -48,9 +50,15 @@ const TweetStory= React.createClass({
       <div>
         {
           this.props.tweets.map(function (tweet, index) {
+
+            const tweetImg = tweet.entities.media ? <img src={tweet.entities.media[0].media_url}/> : null;
+
             return (
               <div key={index} className='panel-block'>
+                <img  src={tweet.user.profile_image_url}/>
                 <p>{tweet.text}</p>
+                <p>{tweet.created_at}</p>
+                {tweetImg}
               </div>
             )
           })
@@ -61,3 +69,13 @@ const TweetStory= React.createClass({
 });
 
 module.exports = TweetStory;
+
+// entities.media[0].media_url
+
+/*
+<div>{if (tweet.entities.media[0].media_url) {
+  return (
+  <img src={tweet.entities.media[0].media_url}/>
+  )
+}
+}</div>*/
