@@ -9,14 +9,22 @@ const ReactDOM = require('react-dom');
 const TweetText = React.createClass({
   render: function() {
     console.log(this.props.hashtags);
-    var hashtags = this.props.hashtags;               // hashtag prop has indices
-    var tweetArray = [];                              // store tweet as array
-    var indices = [0];                                // indices to split tweet
+    var hashtags = this.props.hashtags;
+    var mentions = this.props.userMentions;                                      // hashtag prop has indices
+    console.log(this.props);
+    var tweetArray = [];                                         // store tweet as array
+    var indices = [0];                                           // indices to split tweet
     hashtags.forEach(function (hashtag) {
       indices.push(hashtag.indices[0], hashtag.indices[1])      //index[0] is start, index[1] is finish
     });
+    mentions.forEach(function (mention) {
+      indices.push(mention.indices[0], mention.indices[1])
+    });
+    indices.sort(function(a,b) {
+      return a-b;
+    });
     indices.push(this.props.text.length);                       //index[last] has to be length of tweet
-    //console.log(indices);
+    console.log(indices);
     indices.forEach(function (tweetIndex, index) {
       if (index < indices.length - 1){
         tweetArray.push(this.props.text.slice(tweetIndex, indices[index+1]))
@@ -24,10 +32,15 @@ const TweetText = React.createClass({
     }.bind(this));
     console.log(tweetArray);
 
+
     tweetArray = tweetArray.map(function (tweetPart) {
       if (tweetPart[0] === '#') {
         return (<a href={"https://twitter.com/hashtag/" + tweetPart.slice(1) + "?src=hash"}>{tweetPart}</a>)
-      } else {
+      } else if (tweetPart[0] === '@') {
+        return <a href={"https://twitter.com/" + tweetPart.slice(1)}>{tweetPart}</a>
+      }
+      else
+      {
         return tweetPart
       }
     });

@@ -53,12 +53,10 @@ const TweetStory= React.createClass({
           this.props.tweets.map(function (tweet, index) {
 
             const tweetImg = tweet.entities.media ? <img src={tweet.entities.media[0].media_url}/> : null;
-            const userMentionsTEST = tweet.entities.user_mentions[0] ? <a href={"https://twitter.com/" + tweet.entities.user_mentions[0].screen_name}>@{tweet.entities.user_mentions[0].screen_name}</a> : null;
-            const hashtagTEST = tweet.entities.hashtags[0] ? <a href={"https://twitter.com/hashtag/" + tweet.entities.hashtags[0].text + "?src=hash"}>#{tweet.entities.hashtags[0].text}</a> : null;
             const urlsTEST = tweet.entities.urls[0] ? <a href={tweet.entities.urls[0].expanded_url}>{tweet.entities.urls[0].expanded_url}</a> : null;
 
             const hashtags = tweet.entities.hashtags;
-            const userMentions = tweet.entities.userMentions;
+            const userMentions = tweet.entities.user_mentions;
             const urls = tweet.entities.urls;
             
             
@@ -68,9 +66,6 @@ const TweetStory= React.createClass({
                 <TweetText key={index} text={tweet.text} hashtags={hashtags} userMentions={userMentions} urls={urls}/>
                 <p>{tweet.created_at}</p>
                 {tweetImg}
-                {userMentionsTEST}<br></br>
-                {hashtagTEST}<br></br>
-                {urlsTEST}
               </div>
             )
           })
