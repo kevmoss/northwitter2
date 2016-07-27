@@ -52,6 +52,9 @@ const TweetStory= React.createClass({
           this.props.tweets.map(function (tweet, index) {
 
             const tweetImg = tweet.entities.media ? <img src={tweet.entities.media[0].media_url}/> : null;
+            const userMentions = tweet.entities.user_mentions[0] ? <a href={"https://twitter.com/" + tweet.entities.user_mentions[0].screen_name}>@{tweet.entities.user_mentions[0].screen_name}</a> : null;
+            const hashtags = tweet.entities.hashtags[0] ? <a href={"https://twitter.com/hashtag/" + tweet.entities.hashtags[0].text + "?src=hash"}>#{tweet.entities.hashtags[0].text}</a> : null;
+            const urls = tweet.entities.urls[0] ? <a href={tweet.entities.urls[0].expanded_url}>{tweet.entities.urls[0].expanded_url}</a> : null;
 
             return (
               <div key={index} className='panel-block'>
@@ -59,6 +62,9 @@ const TweetStory= React.createClass({
                 <p>{tweet.text}</p>
                 <p>{tweet.created_at}</p>
                 {tweetImg}
+                {userMentions}<br></br>
+                {hashtags}<br></br>
+                {urls}
               </div>
             )
           })
