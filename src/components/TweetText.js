@@ -10,7 +10,8 @@ const TweetText = React.createClass({
   render: function() {
     console.log(this.props.hashtags);
     var hashtags = this.props.hashtags;
-    var mentions = this.props.userMentions;                                      // hashtag prop has indices
+    var mentions = this.props.userMentions;
+    var urls = this.props.urls;                                                          // hashtag prop has indices
     console.log(this.props);
     var tweetArray = [];                                         // store tweet as array
     var indices = [0];                                           // indices to split tweet
@@ -19,6 +20,9 @@ const TweetText = React.createClass({
     });
     mentions.forEach(function (mention) {
       indices.push(mention.indices[0], mention.indices[1])
+    });
+    urls.forEach(function (urls) {
+      indices.push(urls.indices[0], urls.indices[1])
     });
     indices.sort(function(a,b) {
       return a-b;
@@ -32,16 +36,20 @@ const TweetText = React.createClass({
     }.bind(this));
     console.log(tweetArray);
 
+    var urlCount = -1;
 
-    tweetArray = tweetArray.map(function (tweetPart) {
+    tweetArray = tweetArray.map(function (tweetPart, index) {
       if (tweetPart[0] === '#') {
-        return (<a href={"https://twitter.com/hashtag/" + tweetPart.slice(1) + "?src=hash"}>{tweetPart}</a>)
+        return (<a href={"https://twitter.com/hashtag/" + tweetPart.slice(1) + "?src=hash"} target="new">{tweetPart}</a>)
       } else if (tweetPart[0] === '@') {
-        return <a href={"https://twitter.com/" + tweetPart.slice(1)}>{tweetPart}</a>
+        return <a href={"https://twitter.com/" + tweetPart.slice(1)} target="new">{tweetPart}</a>
+      } else if (index % 2 === 1 ) {
+        urlCount ++;
+        return (<a href={tweetPart} target="new">{tweetPart}</a>);
       }
       else
       {
-        return tweetPart
+        return tweetPart;
       }
     });
 
