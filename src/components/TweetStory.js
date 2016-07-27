@@ -1,6 +1,7 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 const axios = require('axios');
+const TweetText = require('./TweetText');
 
 const TweetStory= React.createClass({
   getInitialState: function () {
@@ -52,19 +53,24 @@ const TweetStory= React.createClass({
           this.props.tweets.map(function (tweet, index) {
 
             const tweetImg = tweet.entities.media ? <img src={tweet.entities.media[0].media_url}/> : null;
-            const userMentions = tweet.entities.user_mentions[0] ? <a href={"https://twitter.com/" + tweet.entities.user_mentions[0].screen_name}>@{tweet.entities.user_mentions[0].screen_name}</a> : null;
-            const hashtags = tweet.entities.hashtags[0] ? <a href={"https://twitter.com/hashtag/" + tweet.entities.hashtags[0].text + "?src=hash"}>#{tweet.entities.hashtags[0].text}</a> : null;
-            const urls = tweet.entities.urls[0] ? <a href={tweet.entities.urls[0].expanded_url}>{tweet.entities.urls[0].expanded_url}</a> : null;
+            const userMentionsTEST = tweet.entities.user_mentions[0] ? <a href={"https://twitter.com/" + tweet.entities.user_mentions[0].screen_name}>@{tweet.entities.user_mentions[0].screen_name}</a> : null;
+            const hashtagTEST = tweet.entities.hashtags[0] ? <a href={"https://twitter.com/hashtag/" + tweet.entities.hashtags[0].text + "?src=hash"}>#{tweet.entities.hashtags[0].text}</a> : null;
+            const urlsTEST = tweet.entities.urls[0] ? <a href={tweet.entities.urls[0].expanded_url}>{tweet.entities.urls[0].expanded_url}</a> : null;
 
+            const hashtags = tweet.entities.hashtags;
+            const userMentions = tweet.entities.userMentions;
+            const urls = tweet.entities.urls;
+            
+            
             return (
               <div key={index} className='panel-block'>
                 <img  src={tweet.user.profile_image_url}/>
-                <p>{tweet.text}</p>
+                <TweetText key={index} text={tweet.text} hashtags={hashtags} userMentions={userMentions} urls={urls}/>
                 <p>{tweet.created_at}</p>
                 {tweetImg}
-                {userMentions}<br></br>
-                {hashtags}<br></br>
-                {urls}
+                {userMentionsTEST}<br></br>
+                {hashtagTEST}<br></br>
+                {urlsTEST}
               </div>
             )
           })
@@ -85,3 +91,7 @@ module.exports = TweetStory;
   )
 }
 }</div>*/
+/*
+
+var urlRegex = /(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/;
+var emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;*/
